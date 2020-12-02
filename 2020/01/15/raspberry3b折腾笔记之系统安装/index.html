@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        raspberry3b折腾笔记之系统安装｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/15/raspberry3b折腾笔记之系统安装/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,17 +143,18 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>raspberry3b折腾笔记之系统安装</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-01-15
                          </span>
                     </span>
                     <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#raspberry pi"
+                           title="raspberry pi">raspberry pi</a>
                         
                     </div>
                 </div>
@@ -162,7 +163,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            raspberry3b折腾笔记之系统安装
         </span>
     </div>
 </header>
@@ -173,19 +174,51 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <p>很少有开头不扯几句直接进入正题的文章了，那么我就说说我为啥买树莓派吧。因为最近的比赛都没有出线，于是想趁这个机会搞搞机器人。之前学过一点opencv，但总感觉不用在成品上没啥意思，所以一狠心，花了246大洋买了这个raspberry3b。<br>因为本人确实没有钱，选用了最经济的购买方案：<br>pi、原配保护盒、散热片、充电器充电线。<br><strong>注：现在网上流行三种安装方式。 第一种：直接连接屏幕，此方式过于简单，本文不再赘述。 第二种：通过HDMI线连接电脑，这是个坑！这是个坑！这是个坑！重要的事情说三遍，不信你去网上搜，一般的电脑的HDMI接口只能输出不能输入，白花我25大洋。 第三种：通过ssh软件登入并通过终端安装远程软件，再用笔记本电脑远程连接，这是本文的做法。</strong></p>
+<blockquote>
+<p><strong>准备：</strong><br>1、将树莓派拆箱拼装；<br>2、硬件准备：TF卡一张（不要太小，本人8G卡装完系统以后还剩3G，想装opencv都不够用，等两天买个闪迪的32G卡）、读卡器、网线、可以连wifi的电脑；<br>3、在树莓派官网下载<a href="http://link.zhihu.com/?target=https://www.raspberrypi.org/downloads/raspbian/">Raspbian</a>(据大佬反映NOOBS太慢，而我忘了下载NOOBS但是安装成功了，所以只提供Rasbian的链接，艾玛我好啰嗦不得不回来补充一句，Linux系统直接wget下载会快一些。）；<br>4、还要准备以下软件（本人在windows操作系统下安装，如果是在Linux系统下可以直接使用dd命令，详情请自行百度）：<a href="http://link.zhihu.com/?target=http://sourceforge.net/projects/win32diskimager/">Win32DiskImager</a>、SSH客户端（如PuTTY，CMDer，Xshell等）、VNCViewer；</p>
+</blockquote>
+<h1 id="第一部分—先放几张照片"><a href="#第一部分—先放几张照片" class="headerlink" title="第一部分—先放几张照片"></a>第一部分—先放几张照片</h1><p>组装盒子和贴散热片这里不管了，百度都有，这应该没啥问题</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/smp-768x1024.jpg"></p>
+<p>图1 整体图1</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/smp2-1024x768.jpg"></p>
+<p>图2 整体图2</p>
+<h1 id="第二部分—系统烧录"><a href="#第二部分—系统烧录" class="headerlink" title="第二部分—系统烧录"></a>第二部分—系统烧录</h1><p>1、将准备好的TF卡用读卡器插在电脑上，并格式化；<br>2、解压下载的Raspbian压缩包，解压得到一个img文件（不要解压到TF卡里）；<br>3、双击安装Win32DiskImager，打开界面如下：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E7%A3%81%E7%9B%98%E6%98%A0%E5%83%8F%E5%B7%A5%E5%85%B7.png"></p>
+<p>图3 磁盘映像工具</p>
+<p>漫长的等待。。。。。。<br>4、最最重要的一步，安全弹出磁盘，over。</p>
+<h1 id="第三部分—电脑的配置"><a href="#第三部分—电脑的配置" class="headerlink" title="第三部分—电脑的配置"></a>第三部分—电脑的配置</h1><p>1、控制面板—网络和Internet—查看网络状态和任务—更改适配器设置—选择WiFi相关的设备，右击属性，共享，两个都打上对号：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/WLAN%E5%B1%9E%E6%80%A7.png"></p>
+<p>图4 WLAN属性</p>
+<p>2、快捷键windows+R，输入cmd，进入命令提示符，输入arp -a查看接口信息（只是查看，看看就行/xk），over。</p>
+<h1 id="第四部分—pi和电脑的连接"><a href="#第四部分—pi和电脑的连接" class="headerlink" title="第四部分—pi和电脑的连接"></a>第四部分—pi和电脑的连接</h1><p>1、给树莓派插上TF卡，查上电源，再插上一根网线，网线另一头插电脑；<br>2、再次进去命令提示符，输入arp -a，查看多出来的接口（一般是192.168.137.1）：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/cmd%E7%95%8C%E9%9D%A2.png"></p>
+<p>图5 cmd界面1</p>
+<p>一开始的时候192.168.137.1下只有4个ip地址而且都不能访问，而本人稀里糊涂的再次arp -a时就多出来好几个，尝试ping一下，居然通了，个人猜测可能是插上网线以后等一段时间才能看到树莓派的ip。<br>3、一般是该接口下的第一个ip就是树莓派的，我们可以ping以下试一试，如果ping通了就没有问题：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/cmd%E7%95%8C%E9%9D%A22.png"></p>
+<p>图6 cmd界面2</p>
+<p>4、打开ssh软件，这里以putty为例，</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/putty%E9%85%8D%E7%BD%AE%E7%95%8C%E9%9D%A2.png"></p>
+<p>图7 putty配置界面</p>
+<p>5、如果见到这个界面，恭喜你，基本成功了</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/putty%E8%BF%9E%E6%8E%A5%E7%95%8C%E9%9D%A2.png"></p>
+<p>图8 putty连接界面</p>
+<p>6、输入pi回车，输入密码raspberry（你的输入不会被显示，相信用linux的都知道吧）</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E8%BF%9E%E6%8E%A5%E6%88%90%E5%8A%9F%E7%95%8C%E9%9D%A2.png"></p>
+<p>图9 连接成功界面</p>
+<p>7、进入了终端，我们就要安装远程软件了，我们安装VNCServer（注意笔记本wifi联网啊）：</p>
+<p><code>sudo apt-get install tightvncserver</code></p>
+<p>8、安装完成后，在终端输入vncserver启动，然后按照提示输入密码，树莓派的远程连接就搭建好了</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/VNC%E9%85%8D%E7%BD%AE%E7%95%8C%E9%9D%A2.png"></p>
+<p>图10 VNC配置界面</p>
+<p>如果这里是1的话，打开电脑的VNC Viewer，输入你的pi的ip地址加‘：1’</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/VNC%E8%BF%9E%E6%8E%A5%E7%95%8C%E9%9D%A2.png"></p>
+<p>图11 VNC连接界面</p>
+<p>确定、输入你设定的密码</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/VNC%E7%99%BB%E9%99%86%E7%95%8C%E9%9D%A2.png"></p>
+<p>图12 VNC登陆界面</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E6%AC%A2%E8%BF%8E%E6%9D%A5%E5%88%B0Pi%E4%B8%96%E7%95%8C-1024x717.png"></p>
+<p>图13 欢迎来到Pi世界</p>
 
                 <hr>
                 
@@ -193,10 +226,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
+                        <a href="/2020/01/17/计算机视觉-条形码-二维码识别/" data-toggle="tooltip" data-placement="top"
+                           title="计算机视觉---条形码/二维码识别">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2016/05/26/hello-world/" data-toggle="tooltip" data-placement="top"
+                           title="Hello World">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +271,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E9%83%A8%E5%88%86%E2%80%94%E5%85%88%E6%94%BE%E5%87%A0%E5%BC%A0%E7%85%A7%E7%89%87"><span class="toc-text">第一部分—先放几张照片</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E9%83%A8%E5%88%86%E2%80%94%E7%B3%BB%E7%BB%9F%E7%83%A7%E5%BD%95"><span class="toc-text">第二部分—系统烧录</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E9%83%A8%E5%88%86%E2%80%94%E7%94%B5%E8%84%91%E7%9A%84%E9%85%8D%E7%BD%AE"><span class="toc-text">第三部分—电脑的配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E9%83%A8%E5%88%86%E2%80%94pi%E5%92%8C%E7%94%B5%E8%84%91%E7%9A%84%E8%BF%9E%E6%8E%A5"><span class="toc-text">第四部分—pi和电脑的连接</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -254,6 +292,9 @@
                         <a href="/tags/">FEATURED TAGS</a>
                     </h5>
                     <div class="tags">
+                        
+                        <a class="tag" href="/tags/#raspberry pi"
+                           title="raspberry pi">raspberry pi</a>
                         
                     </div>
                 </section>

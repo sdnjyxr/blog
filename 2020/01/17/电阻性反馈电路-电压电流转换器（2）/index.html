@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        电阻性反馈电路---电压电流转换器（2）｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/17/电阻性反馈电路-电压电流转换器（2）/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,14 +143,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>电阻性反馈电路---电压电流转换器（2）</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-01-17
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -162,7 +160,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            电阻性反馈电路---电压电流转换器（2）
         </span>
     </div>
 </header>
@@ -173,19 +171,32 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <h3 id="先介绍一个负阻转换器"><a href="#先介绍一个负阻转换器" class="headerlink" title="先介绍一个负阻转换器"></a>先介绍一个负阻转换器</h3><p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E8%B4%9F%E9%98%BB%E8%BD%AC%E6%8D%A2%E5%99%A8.png"></p>
+<p>图1 负阻转换器</p>
+<p>根据电路容易得到以下关系：<br>[ i=\frac{v_i-v_o}{R_2} \tag{1} ]</p>
+<p>$$v_o=(1+\frac{R_4}{R_3})v_i \tag{2}$$</p>
+<p>联立求得<br>$$R_i=\frac{v_i}{i}=-\frac{R_2R_3}{R_4} \tag{3}$$</p>
+<p>这样就构成了一个负阻转换器。</p>
+<h2 id="下面介绍Howland电流泵"><a href="#下面介绍Howland电流泵" class="headerlink" title="下面介绍Howland电流泵"></a>下面介绍Howland电流泵</h2><p>Howland电流泵的电路由一个具有串联电阻(R_1)的输入源(v_i)和一个合成的接地电阻阻值为(-R_2R_3/R_4)的负阻转换器所组成。其电路如下：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/Howland%E7%94%B5%E6%B5%81%E6%B3%B5.png"></p>
+<p>图2 Howland电流泵</p>
+<p><strong>Howland电流泵</strong>的诺顿等效电路如下所示：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E8%AF%BA%E9%A1%BF%E7%AD%89%E6%95%88%E7%94%B5%E8%B7%AF.png"></p>
+<p>图3 诺顿等效电路</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E5%88%A9%E7%94%A8%E4%B8%80%E4%B8%AA%E8%B4%9F%E7%94%B5%E9%98%BB%E6%8E%A7%E5%88%B6R0.png"></p>
+<p>图4 利用一个负电阻控制R0</p>
+<p>如图所示，这里有$$R_O=\frac{R_2}{R_2/R_1-R_4/R_3}$$。显然，$$i_O=\frac{v_I}{R_1}-\frac{v_L}{R_O}$$对于一个真正的电流源，必须有$$R_O=\infty$$。为了满足这个条件，四个电路必须构成一个<strong>平衡电桥</strong>：</p>
+<p>$$\frac{R_4}{R_3}=\frac{R_2}{R_1} \tag{4}$$</p>
+<p>此时</p>
+<p>$$i_O=\frac{v_I}{R_1} \tag{5}$$</p>
+<p>显然有</p>
+<p>$$v_L=v_OR_3/(R_3+R_4)=v_OR_1/(R_1+R_2) \tag{6}$$</p>
+<p>假定对称输出饱和，电压柔量是</p>
+<p>$$v_L\leq\frac{R_1}{R_1+R_2}V_{sat} \tag{7}$$</p>
+<p>为了扩展柔量，总是要将$$R_2$$保持在比$$R_1$$小得多（如$$R_2\cong0.1R_1$$）。<br>可见，Howland电路既包含有一个负反馈路径也包含一个正反馈路径。且$$\beta_N=R_3/(R_3+R_4)$$和$$\beta_P=(R_1//R_L)/[(R_1//R_L)+R_2]$$，$$R_L$$表示负载。在电桥平衡的条件下，有：</p>
+<p>$$\beta_N=\frac{1}{1+R_2/R_1} \tag{8}$$</p>
+<p>$$\beta_P=\frac{1}{1+R_2/R_1+R_2/R_L} \tag{9}$$</p>
+<p>显然，只要电路接在某个有限负载$$R_L&lt;\infty$$上，就有$$\beta_N&lt;\beta_P$$，这表明负反馈一定占优势，因此得到一个稳定的电路。</p>
 
                 <hr>
                 
@@ -193,10 +204,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
+                        <a href="/2020/03/13/基于c的fft数值算法/" data-toggle="tooltip" data-placement="top"
+                           title="基于C++的FFT数值算法">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/01/17/电阻性反馈电路-电压电流转换器（1）/" data-toggle="tooltip" data-placement="top"
+                           title="电阻性反馈电路---电压电流转换器（1）">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +249,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%88%E4%BB%8B%E7%BB%8D%E4%B8%80%E4%B8%AA%E8%B4%9F%E9%98%BB%E8%BD%AC%E6%8D%A2%E5%99%A8"><span class="toc-text">先介绍一个负阻转换器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%8B%E9%9D%A2%E4%BB%8B%E7%BB%8DHowland%E7%94%B5%E6%B5%81%E6%B3%B5"><span class="toc-text">下面介绍Howland电流泵</span></a>
                 </div>
             </div>
         </div>
@@ -374,6 +390,35 @@
     })
 </script>
 
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <!-- Google Analytics -->

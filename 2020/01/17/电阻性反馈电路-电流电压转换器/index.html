@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        电阻性反馈电路---电流电压转换器｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/17/电阻性反馈电路-电流电压转换器/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,14 +143,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>电阻性反馈电路---电流电压转换器</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-01-17
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -162,7 +160,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            电阻性反馈电路---电流电压转换器
         </span>
     </div>
 </header>
@@ -173,19 +171,41 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <p>  一个<strong>电流电压转化器（I-V转换器）</strong>也称为<strong>跨阻放大器（transresistance amplifier）</strong>，它接受一个输入电流$$i_I$$，并产生形为$$v_o = Ai_I$$的输出电压，这里A是电路增益，以伏/安计。如图</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E5%9F%BA%E6%9C%ACI-V%E8%BD%AC%E6%8D%A2%E5%99%A8.png" alt="图1 基本I-V转换器"></p>
+<p>图1 基本I-V转换器</p>
+<p>  假设运算放大器是理想的，那么有$$v_o=-Ri_I \tag{1}$$增益是-R。增益的幅度也成为该转换器的<strong>灵敏度</strong>。</p>
+<blockquote>
+<p>  值得注意的是，负反馈元件不必局限为一个电阻，在更一般的情况下它是一个阻抗$$Z(s)$$，其中$$s$$是复频率，对(1)式取拉普拉斯变换形式有$$V_o(s)=-Z(s)I_i(s)\tag{2}$$从而这个电路称为<strong>跨阻抗放大器</strong>。</p>
+</blockquote>
+<h1 id="闭环参数"><a href="#闭环参数" class="headerlink" title="闭环参数"></a>闭环参数</h1><p>  如果要使用一个实际的运算放大器，就要来研究非理想的情况。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E8%B4%9F%E5%8F%8D%E9%A6%88%E6%8B%93%E6%89%91-a%E8%BE%93%E5%85%A5%E4%B8%B2%E8%81%94-b%E8%BE%93%E5%85%A5%E5%B9%B6%E8%81%94-c%E8%BE%93%E5%87%BA%E5%B9%B6%E8%81%94-d%E8%BE%93%E5%87%BA%E4%B8%B2%E8%81%94.png"></p>
+<p>图2 负反馈拓扑 a)输入串联 b)输入并联 c)输出并联 d)输出串联</p>
+<p>  由上图可以判断，这是一个并联-并联拓扑结构。</p>
+<h2 id="环路增益"><a href="#环路增益" class="headerlink" title="环路增益"></a>环路增益</h2><p>求解过程如下：<br>  除去所有输入源后，如下图所示</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E9%99%A4%E5%8E%BB%E8%BE%93%E5%85%A5%E6%BA%90%E5%90%8E%E7%9A%84%E7%94%B5%E8%B7%AF%E5%9B%BE.png"></p>
+<p>图3 除去输入源后的电路图</p>
+<p>在图示位置剖开并注入一个测试信号$$v_T$$，当这个信号环绕这个环路传播时，作为返回信号$$v_R=-a\beta v_T$$又折回来，所以$$T=a\beta$$可按下式$$T=-\frac{v_R}{v_T}\tag{3}$$求得。又有$$v_R=-\frac{a r_d}{r_o+R+r_d} v_T$$可知$$T=\frac{a r_d}{r_o+R+r_d}\tag{4}$$</p>
+<h2 id="闭环增益"><a href="#闭环增益" class="headerlink" title="闭环增益"></a>闭环增益</h2><p>  在实际的电路中，通常有$$r_o \ll R$$,因此对(4)式有$$T=\frac{a r_d}{R+r_d} \tag{5}$$<br>对原电路分析可知$$I_i+\frac{v_o-v_D}{R}=\frac{v_D}{r_d}$$，$$-av_D=v_o$$。消去$$v_D$$求得$$A=\frac{v_o}{I_i}=-R\frac{1}{1+\frac{1}{T}} \tag{6}$$</p>
+<h2 id="输入阻抗"><a href="#输入阻抗" class="headerlink" title="输入阻抗"></a>输入阻抗</h2><p>$$R_i = \frac{r_d(R+r_o)}{1+T} \tag{7}$$</p>
+<h2 id="输出阻抗"><a href="#输出阻抗" class="headerlink" title="输出阻抗"></a>输出阻抗</h2><p>$$R_o = \frac{r_o}{1+T} \tag{8}$$</p>
+<blockquote>
+<p><strong>例题：</strong> 如果图1用741运算放大器和$$R=1M \Omega$$ 实现，求它的闭环参数。<br><strong>题解：</strong>查阅数据手册</p>
+<p>可知$$r_d = 2,000,000 \Omega $$，$$r_o = 75 \Omega $$，$$a=200,000V/V$$。</p>
+<p>求得</p>
+<p>[T=\frac{200,000V/V*2,000,000 \Omega }{2,000,000\Omega+1,000,000 \Omega +75 \Omega }=133,330 V/A ]</p>
+<p>[ A=-1,000,000 \Omega \frac{1}{1+\frac{1}{133,330}}=-0.999993 V/ \mu A ]</p>
+<p>[ R_i=5 \Omega ,R_o=56m \Omega ]</p>
+</blockquote>
+<h1 id="高灵敏度I-V转换器"><a href="#高灵敏度I-V转换器" class="headerlink" title="高灵敏度I-V转换器"></a>高灵敏度I-V转换器</h1><p>  很明显，高灵敏度的应用可能会要求特别大的电阻，除非采取适当的措施，否则与电阻R并联的周围电阻将会是净反馈电阻减小，并使电路的准确度降低。图4中展示了一种广为采用的方法来避免这个问题。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E9%AB%98%E7%81%B5%E6%95%8F%E5%BA%A6I-V%E8%BD%AC%E6%8D%A2%E5%99%A8.png"></p>
+<p>图4 高灵敏度I-V转换器</p>
+<p>  这个电路利用一种T型网络来实现高灵敏度，而不需要特别大的电阻。<br>  在节点$$v_1$$将电流相加得$$-\frac{v_1}{R}-\frac{v_1}{R_1}+\frac{v_o-v_1}{R_2}=0$$，根据“虚短”，“虚断”可知，$$v_1=-Ri_I$$，消去$$v_1$$得到[ v_o = -kR i_I ] [k=1+\frac{R_2}{R_1}+\frac{R_2}{R} \tag{9} ]，这个电路是靠倍乘因子$$k$$来增加R的，这样就可以从一个合理的R值出发，然后乘以所需要的$$k$$值来实现高灵敏度。</p>
+<blockquote>
+<p>实际的运算放大器在它的输入端还是有一个微小的电流，称为<strong>输入偏置电流</strong>，它会影响高灵敏度I-V转化器的性能。这一缺陷可以用低输入偏置电流的运算放大器来克服，如<strong>JFET输入</strong>和<strong>MOSFET输入</strong>运算放大器。</p>
+</blockquote>
+<h1 id="光电检测器放大器"><a href="#光电检测器放大器" class="headerlink" title="光电检测器放大器"></a>光电检测器放大器</h1><p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/a-%E5%85%89%E7%94%B5%E5%AF%BC%E6%A3%80%E6%B5%8B%E5%99%A8-b-%E5%85%89%E7%94%B5%E6%A3%80%E6%B5%8B%E5%99%A8.png"></p>
+<p>图5  (a) 光电导检测器 (b) 光电检测器</p>
 
                 <hr>
                 
@@ -193,10 +213,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
+                        <a href="/2020/01/17/电阻性反馈电路-电压电流转换器（1）/" data-toggle="tooltip" data-placement="top"
+                           title="电阻性反馈电路---电压电流转换器（1）">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/01/17/花书-实例：主成分分析/" data-toggle="tooltip" data-placement="top"
+                           title="花书---实例：主成分分析">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +258,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%97%AD%E7%8E%AF%E5%8F%82%E6%95%B0"><span class="toc-text">闭环参数</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%8E%AF%E8%B7%AF%E5%A2%9E%E7%9B%8A"><span class="toc-text">环路增益</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%97%AD%E7%8E%AF%E5%A2%9E%E7%9B%8A"><span class="toc-text">闭环增益</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%E9%98%BB%E6%8A%97"><span class="toc-text">输入阻抗</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%E9%98%BB%E6%8A%97"><span class="toc-text">输出阻抗</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E9%AB%98%E7%81%B5%E6%95%8F%E5%BA%A6I-V%E8%BD%AC%E6%8D%A2%E5%99%A8"><span class="toc-text">高灵敏度I-V转换器</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%85%89%E7%94%B5%E6%A3%80%E6%B5%8B%E5%99%A8%E6%94%BE%E5%A4%A7%E5%99%A8"><span class="toc-text">光电检测器放大器</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -374,6 +399,35 @@
     })
 </script>
 
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <!-- Google Analytics -->

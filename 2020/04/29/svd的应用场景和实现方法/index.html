@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        SVD的应用场景和实现方法｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/04/29/svd的应用场景和实现方法/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,14 +143,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>SVD的应用场景和实现方法</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-04-29
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -162,7 +160,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            SVD的应用场景和实现方法
         </span>
     </div>
 </header>
@@ -173,30 +171,53 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <blockquote>
+<p>在Matlab中，我们可以使用 [U,S,V]=svd(A)命令，对矩阵A进行奇异值分解。</p>
+</blockquote>
+<h2 id="什么是SVD？"><a href="#什么是SVD？" class="headerlink" title="什么是SVD？"></a>什么是SVD？</h2><p>[ USV^{T} = A ]</p>
+<p>其中，U和V是旋转矩阵，S是缩放矩阵，例如：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image.png"></p>
+<p>在2维以上的情况下，如果A是( m \times n )矩阵，则U为 ( m \times m )矩阵，S为 ( m \times n )矩阵，V为 ( n \times n )矩阵。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-1.png"></p>
+<p>此时U和V都是酉矩阵——列向量组成一组标准正交基。</p>
+<h2 id="SVD的应用"><a href="#SVD的应用" class="headerlink" title="SVD的应用"></a>SVD的应用</h2><p>以下图为例：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-2.png"></p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-3.png"></p>
+<p>US的第一列是U按照S的第一个值缩放的结果，( A_{partial} )是US的第一列乘以( V^{T} )的第一行的结果。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-4.png"></p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-5.png"></p>
+<p>两次矩阵加和为原矩阵，即使用U每一列求得结果的线性组合可以重新得到原矩阵。</p>
+<p>但是，在现实数据中，我们往往可以只使用U的前几列得到非常接近原矩阵A的结果。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-6.png"></p>
+<p>我们可以看到S的第一个值远大于第二个值，故可以忽略第二个值。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/04/image-9-1024x410.png"></p>
+<p>在上图中，第二张图片仅使用了300列中得到前10列就得到了与原图像相近的结果。显然，SVD可以用于图像压缩技术。<br><a target="_blank" rel="noopener" href="https://fanyi.baidu.com/?aldtype=16047###"></a><a href="javascript:void(0);"></a></p>
+<p>综上，U列是数据的主要组成部分，可以生成原始矩阵列的主要信息。</p>
+<p>它的一个用途是构造一个矩阵，其中每一列是一个单独的数据样本。在该矩阵上运行SVD，并查看U的前几列，以查看列之间权重分布，这称为数据样本的主成分分析（PCA）。</p>
+<h2 id="SVD的实现方法"><a href="#SVD的实现方法" class="headerlink" title="SVD的实现方法"></a>SVD的实现方法</h2><h3 id="特征向量的求法"><a href="#特征向量的求法" class="headerlink" title="特征向量的求法"></a>特征向量的求法</h3><ul>
+<li><p>X为一个随机单位矩阵。</p>
+</li>
+<li><p>如果X未收敛，则循环执行X=AX和X的归一化。</p>
+</li>
+</ul>
+<h3 id="SVD的求法"><a href="#SVD的求法" class="headerlink" title="SVD的求法"></a>SVD的求法</h3><ul>
+<li><p>得到( AA^{T} )的特征向量，这些特征向量组成U的每一列，特征值的平方根组成S；</p>
+</li>
+<li><p>得到( A^{T} A )的特征向量，这些特征向量组成V的每一列。</p>
+</li>
+</ul>
+<p><strong>matlab在75次迭代后不收敛报错。</strong></p>
 
                 <hr>
                 
 
                 <ul class="pager">
                     
-                    <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
-                    </li>
                     
+                    <li class="next">
+                        <a href="/2020/03/27/距离相关性评价python源码/" data-toggle="tooltip" data-placement="top"
+                           title="距离相关性评价Python源码">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +254,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BB%80%E4%B9%88%E6%98%AFSVD%EF%BC%9F"><span class="toc-text">什么是SVD？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%BA%94%E7%94%A8"><span class="toc-text">SVD的应用</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#SVD%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-text">SVD的实现方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%89%B9%E5%BE%81%E5%90%91%E9%87%8F%E7%9A%84%E6%B1%82%E6%B3%95"><span class="toc-text">特征向量的求法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SVD%E7%9A%84%E6%B1%82%E6%B3%95"><span class="toc-text">SVD的求法</span></a></li></ol></li></ol>
                 </div>
             </div>
         </div>
@@ -374,6 +395,35 @@
     })
 </script>
 
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <!-- Google Analytics -->

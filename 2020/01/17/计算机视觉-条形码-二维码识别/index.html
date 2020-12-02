@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        计算机视觉---条形码/二维码识别｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/17/计算机视觉-条形码-二维码识别/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,14 +143,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>计算机视觉---条形码/二维码识别</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-01-17
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -162,7 +160,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            计算机视觉---条形码/二维码识别
         </span>
     </div>
 </header>
@@ -173,19 +171,49 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+                <p>这篇文章是无意间看到的，稍作修改，写成此文。<br><strong><em>附一张效果图</em></strong></p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E6%95%88%E6%9E%9C%E5%9B%BE.png"></p>
+<p>图1 效果图</p>
+<p>闲言少叙，言归正传。</p>
+<p><strong><em>S.1 调用摄像头</em></strong></p>
+<p>cap = cv2.VideoCapture(0)</p>
+<p><strong><em>S.2 用Sobel算子进行边缘检测，滤波后二值化</em></strong></p>
+<p>gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)<br>gradX = cv2.Sobel(gray, ddepth = cv2.CV_16S, dx = 1, dy = 0, ksize = -1)<br>gradY = cv2.Sobel(gray, ddepth = cv2.CV_16S, dx = 0, dy = 1, ksize = -1)<br>gradient = cv2.subtract(gradX, gradY)<br>gradient = cv2.convertScaleAbs(gradient)<br>blurred = cv2.blur(gradient, (9, 9))<br>(_, thresh) = cv2.threshold(blurred, 225, 255, cv2.THRESH_BINARY)</p>
+<p><strong><em>S.3 通过闭运算排除小型黑洞，并处理掉条形码中的黑块</em></strong></p>
+<p>kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (21, 7))<br>closed = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)<br>closed = cv2.erode(closed, None, iterations = 4)<br>closed = cv2.dilate(closed, None, iterations = 8)    #这里原来是4,因为通过查看二值图发现小白块太多，所以改成8,效果大大优化</p>
+<p><strong><em>S.4 边缘检测，并绘制矩形框，框选条形码区域</em></strong></p>
+<p>im, contours, hierarchy = cv2.findContours(closed,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)<br>rois = []<br>x = y = w = h = 0<br>for c in contours:<br>    x, y, w, h = cv2.boundingRect(c)<br>    if w &gt; 10 and h &gt; 20:<br>        rois.append((x,y,w,h))<br>for r in rois:<br>    x, y, w, h = r<br>    cv2.rectangle(frame, (x,y), (x+w,y+h), (153,153,0), 2)</p>
+<p><strong><em>完整代码如下</em></strong></p>
+<p>#!/usr/bin/python3</p>
+<h1 id="coding-UTF-8"><a href="#coding-UTF-8" class="headerlink" title="-- coding: UTF-8 --"></a>-<em>- coding: UTF-8 -</em>-</h1><p>import cv2<br>import numpy as np</p>
+<p>cap = cv2.VideoCapture(0)<br>while(1):<br>    ret, frame = cap.read()<br>    if ret == True:<br>        gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)</p>
+<pre><code>    gradX = cv2.Sobel(gray, ddepth = cv2.CV_16S, dx = 1, dy = 0, ksize = -1)
+    gradY = cv2.Sobel(gray, ddepth = cv2.CV_16S, dx = 0, dy = 1, ksize = -1)
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
+    gradient = cv2.subtract(gradX, gradY)
+    gradient = cv2.convertScaleAbs(gradient)
+    blurred = cv2.blur(gradient, (9, 9))
+    (_, thresh) = cv2.threshold(blurred, 225, 255, cv2.THRESH_BINARY)
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
+    kernel = cv2.getStructuringElement(cv2.MORPH_RECT, (21, 7))
+    closed = cv2.morphologyEx(thresh, cv2.MORPH_CLOSE, kernel)
+    closed = cv2.erode(closed, None, iterations = 4)
+    closed = cv2.dilate(closed, None, iterations = 8)
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+    im, contours, hierarchy = cv2.findContours(closed,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE) 
+    rois = []
+    x = y = w = h = 0
+    for c in contours:
+        x, y, w, h = cv2.boundingRect(c)
+        if w &gt; 10 and h &gt; 20:
+            rois.append((x,y,w,h))
+    for r in rois:
+        x, y, w, h = r
+        cv2.rectangle(frame, (x,y), (x+w,y+h), (153,153,0), 2)
+    cv2.imshow(&quot;123&quot;,frame)
+    k = cv2.waitKey(20)
+    if k &amp; 0xFF == ord(&#39;q&#39;):
+        break</code></pre>
 
                 <hr>
                 
@@ -193,10 +221,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
+                        <a href="/2020/01/17/计算机视觉-手写体识别，k-最临近分类/" data-toggle="tooltip" data-placement="top"
+                           title="计算机视觉---手写体识别，K-最临近分类">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
+                           title="raspberry3b折腾笔记之系统安装">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +266,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#coding-UTF-8"><span class="toc-text">-- coding: UTF-8 --</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -374,6 +407,35 @@
     })
 </script>
 
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <!-- Google Analytics -->

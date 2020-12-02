@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="尹晓瑞在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="波利亚老猫" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        花书---实例：主成分分析｜波利亚猫舍
+        
+    </title>
+
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/17/花书-实例：主成分分析/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('background.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    波利亚老猫
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>花书---实例：主成分分析</h1>
+                    
+                    <span class="meta">
+                         作者 Yin Xiaorui
+                        <span>
+                          日期 2020-01-17
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            花书---实例：主成分分析
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>主成分分析(principal components analysis, PCA)是一个简单的机器学习算法，可以通过基础的线性代数知识推导。</p>
+</blockquote>
+<p>假设在R^n^空间中有m个点。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-88dcfafdf3c81afa.png"></p>
+<p>编码这些点的一种方式是用低维表示。对于每个点</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-7c2906876e3ac257.png"></p>
+<p>，会有一个对应的编码向量</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-3ad151f846dd24bf.png"></p>
+<p>。如果l比n小，那么我们便对原来的数据进行了有损压缩，我们希望找到一个<strong><em>编码函数</em></strong>，根据输入返回编码，</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-969b25bae68f5a5e.png"></p>
+<p>;我们也希望找到一个<strong><em>解码函数</em></strong>，给定编码重构输入</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-f16f1147dfa23bbf.png"></p>
+<p>PCA由我们选择的解码函数而定。为了简化解码器，我们使用矩阵乘法将编码映射回R^n^,即</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-55dc1b30b5165c61.png"></p>
+<p>, 其中</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-a9a3510793d0333d.png"></p>
+<p>是定义解码的矩阵。</p>
+<blockquote>
+<p>目前为止，所描述的问题可能会有多个解，因为如果我们按比例缩小所有点对应的编码向量c^(i)^，那么只需按比例放大D^(i)^即可保持结果不变，为了使问题有唯一解，我们限制D中所有列向量都有单位范数。</p>
+</blockquote>
+<p>计算这个解码器的最优编码可能是一个困难的问题。为了使编码问题简单一些，PCA限制D的列向量彼此正交(注意，除非l=n，否则严格意义上D不是一个正交矩阵)。</p>
+<p>为了将这个基本想法变为我们能够实现的算法，首先我们需要明确如何根据每一个输入x得到一个最优编码c。一种方法是最小化原始输入向量x和重构向量g(c)之间的距离。我们使用范数来衡量他们之间的距离。在PCA算法中，我们使用L2范数</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/image-1.png"></p>
+<p>我们可取平方L2范数代替L2范数，</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-f8a1343a649ec6ef.png"></p>
+<p>该最小化函数可以简化成</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-a16b8712481cbf07.png"></p>
+<p>因为第一项x^T^x不依赖于c，所以我们可以忽略它，得到以下优化目标：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-84be4ae625761a91.png"></p>
+<p>更进一步，带入g(c)的定义：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-ace29fc2bfdadd8e.png"></p>
+<p>我们可以通过向量微积分来求解这个最优化问题</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-b374664dd4a98903.png"></p>
+<blockquote>
+<p>最优编码x只需要一个矩阵-向量乘法操作。</p>
+</blockquote>
+<p>为了编码向量，我们使用编码函数</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-5ca3f152332e8c94.png"></p>
+<p>进一步使用矩阵乘法，我们也可以定义PCA重构操作：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-95c42f0334b9fdae.png"></p>
+<p>接下来，我们需要挑选编码矩阵D。因为用相同的矩阵D对所有点进行编码，我们不能再孤立的看待每个点。反之，我们必须最小化所有位数和所有点上的误差矩阵的Frobenius范数：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-a168b223fcbea9c3.png"></p>
+<p>为了推到用于寻求D的算法，我们首先考虑l=1的情况，在这种情况下，D是一个单一向量d，问题简化为：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-78c5de0837682237.png"></p>
+<p>此时，使用单一矩阵来重述问题，比将问题写成求和形式更有帮助，这有助于我们使用更紧凑的符号，将表示各点的向量堆叠成一个矩阵，记为</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-02303bd516dc62c2.png"></p>
+<p>，其中</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-fb7d7b8ecfa349e6.png"></p>
+<p>，原问题可重述为，</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-b5489933980ae30d.png"></p>
+<p>暂不考虑约束，我们可以将Frobenius范数简化成下面的形式：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-3edb834501cc717d.png"></p>
+<p>此时，我们再来考虑约束条件</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-36f48cd61883b1cc.png"></p>
+<p>利用拉格朗日函数可以得到：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-25a3100c2243c6a7.png"></p>
+<p>对d求导有</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-a3ce200165d159c7.png"></p>
+<p>即为</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-94a2d30be85c3e3b.png"></p>
+<p>这个优化问题可以通过特征分解来求解，具体来讲，最优的d是X^T^X最大特征值对应的特征向量。</p>
+<blockquote>
+<p>以上推到特定于l=1的情况，仅得到了一个主成分，更一般的，当我们希望得到主成分的基时，矩阵D由前1个最大的特征值对应的特征向量组成。</p>
+<p>如果你熟悉谱聚类的优化过程，就会发现和PCA的非常类似，只不过谱聚类是求前k个最小的特征值对应的特征向量，而PCA是求前k个最大的特征值对应的特征向量。</p>
+</blockquote>
+<h1 id="PCA算法流程"><a href="#PCA算法流程" class="headerlink" title="PCA算法流程"></a>PCA算法流程</h1><h3 id="输入：n维样本集"><a href="#输入：n维样本集" class="headerlink" title="输入：n维样本集"></a>输入：n维样本集</h3><p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-110851c77e17fb36.png"></p>
+<p>,要降维到n’。</p>
+<h3 id="输出：降维后的样本集D’"><a href="#输出：降维后的样本集D’" class="headerlink" title="输出：降维后的样本集D’"></a>输出：降维后的样本集D’</h3><ol>
+<li>对所有的样本进行中心化(去均值)：</li>
+</ol>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-b188e42ee13a27d1.png"></p>
+<ol start="2">
+<li>计算样本的协方差矩阵( XX^T )  </li>
+<li>对矩阵 ( XX^T ) 进行特征值分解  </li>
+<li>取出最大的n’个特征值对应的特征向量</li>
+</ol>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-d960737c823c5147.png"></p>
+<p>将所有的特征向量标准化后，组成特征向量矩阵W。<br>5) 对样本集中的每一个样本 ( x^{(i)} )，转换为新的样本( z^{(i)} = W^Tx^{(i)} )<br>6) 得到输出样本集( D’=(z^{(1)},z^{(2)}, \cdots ,z^{(m)}) )<br>有时候，我们不指定降维后的n’的值，而是换种方式，指定一个降维到主成分比重阈值t。这个阈值t在(0,1]之间。假如我们的n个特征值为</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-60feffd5d70822fb.png"></p>
+<p>，则n’可通过下式得到：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-c6f69b2d7d65d885.png"></p>
+<h1 id="PCA实例"><a href="#PCA实例" class="headerlink" title="PCA实例"></a>PCA实例</h1><p>下面举一个简单的例子，说明PCA的过程。</p>
+<p>假设我们的数据集有10个二维数据(2.5,2.4), (0.5,0.7), (2.2,2.9), (1.9,2.2), (3.1,3.0), (2.3, 2.7), (2, 1.6), (1, 1.1), (1.5, 1.6), (1.1, 0.9)，需要用PCA降到1维特征。</p>
+<p>首先我们对样本中心化，这里样本的均值为(1.81, 1.91),所有的样本减去这个均值后，即中心化后的数据集为(0.69, 0.49), (-1.31, -1.21), (0.39, 0.99), (0.09, 0.29), (1.29, 1.09), (0.49, 0.79), (0.19, -0.31), (-0.81, -0.81), (-0.31, -0.31), (-0.71, -1.01)。</p>
+<p>现在我们开始求样本的协方差矩阵，由于我们是二维的，则协方差矩阵为：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-0e89b3a0eaa09054.png"></p>
+<p>求出特征值为(0.490833989, 1.28402771)，对应的特征向量分别为：<br>( (0.735178656, 0.677873399)^T )，( ( -0.677873399, -0.735178656)^T ),由于最大的k=1个特征值为1.28402771，对于的k=1个特征向量为( ( -0.677873399, -0.735178656)^T )，则我们的( W=( -0.677873399, -0.735178656)^T ) 。我们对所有的数据集进行投影</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-60870ea6bae7ea97.png"></p>
+<p>，得到PCA降维后的10个一维数据集为：<br>(-0.827970186， 1.77758033， -0.992197494， -0.274210416， -1.67580142， -0.912949103， 0.0991094375， 1.14457216, 0.438046137， 1.22382056)</p>
+<h1 id="核主成分分析KPCA"><a href="#核主成分分析KPCA" class="headerlink" title="核主成分分析KPCA"></a>核主成分分析KPCA</h1><p>在上面的PCA算法中，我们假设存在一个线性的超平面，可以让我们对数据进行投影。但是有些时候，数据不是线性的，不能直接进行PCA降维。这里就需要用到和支持向量机一样的核函数的思想，先把数据集从n维映射到线性可分的高维N&gt;n,然后再从N维降维到一个低维度n’, 这里的维度之间满足n’&lt;n&lt;N。</p>
+<p>使用了核函数的主成分分析一般称之为核主成分分析(Kernelized PCA, 以下简称KPCA。假设高维空间的数据是由n维空间的数据通过映射ϕ产生。</p>
+<p>则对于n维空间的特征分解：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-5bc3fb72d661e900.png"></p>
+<p>映射为：</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/6203090-ee705cd3e77c2fa4.png"></p>
+<p>通过在高维空间进行协方差矩阵的特征值分解，然后用和PCA一样的方法进行降维。一般来说，映射ϕ不用显式的计算，而是在需要计算的时候通过核函数完成。由于KPCA需要核函数的运算，因此它的计算量要比PCA大很多。</p>
+<h1 id="PCA算法总结"><a href="#PCA算法总结" class="headerlink" title="PCA算法总结"></a>PCA算法总结</h1><p>这里对PCA算法做一个总结。作为一个非监督学习的降维方法，它只需要特征值分解，就可以对数据进行压缩，去噪。因此在实际场景应用很广泛。为了克服PCA的一些缺点，出现了很多PCA的变种，比如为解决非线性降维的KPCA，还有解决内存限制的增量PCA方法Incremental PCA，以及解决稀疏数据降维的PCA方法Sparse PCA等。</p>
+<h3 id="PCA算法的主要优点有："><a href="#PCA算法的主要优点有：" class="headerlink" title="PCA算法的主要优点有："></a>PCA算法的主要优点有：</h3><ol>
+<li>仅仅需要以方差衡量信息量，不受数据集以外的因素影响。　  </li>
+<li>各主成分之间正交，可消除原始数据成分间的相互影响的因素。  </li>
+<li>计算方法简单，主要运算是特征值分解，易于实现。</li>
+</ol>
+<h3 id="PCA算法的主要缺点有："><a href="#PCA算法的主要缺点有：" class="headerlink" title="PCA算法的主要缺点有："></a>PCA算法的主要缺点有：</h3><ol>
+<li>主成分各个特征维度的含义具有一定的模糊性，不如原始样本特征的解释性强。  </li>
+<li>方差小的非主成分也可能含有对样本差异的重要信息，因降维丢弃可能对后续数据处理有影响。</li>
+</ol>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    <li class="previous">
+                        <a href="/2020/01/17/电阻性反馈电路-电流电压转换器/" data-toggle="tooltip" data-placement="top"
+                           title="电阻性反馈电路---电流电压转换器">&larr; Previous Post</a>
+                    </li>
+                    
+                    
+                    <li class="next">
+                        <a href="/2020/01/17/计算机视觉-手写体识别，svm分类/" data-toggle="tooltip" data-placement="top"
+                           title="计算机视觉---手写体识别，SVM分类">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC81MjEwNC8yODU4NQ">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E6%B5%81%E7%A8%8B"><span class="toc-text">PCA算法流程</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%85%A5%EF%BC%9An%E7%BB%B4%E6%A0%B7%E6%9C%AC%E9%9B%86"><span class="toc-text">输入：n维样本集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BE%93%E5%87%BA%EF%BC%9A%E9%99%8D%E7%BB%B4%E5%90%8E%E7%9A%84%E6%A0%B7%E6%9C%AC%E9%9B%86D%E2%80%99"><span class="toc-text">输出：降维后的样本集D’</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PCA%E5%AE%9E%E4%BE%8B"><span class="toc-text">PCA实例</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%A0%B8%E4%B8%BB%E6%88%90%E5%88%86%E5%88%86%E6%9E%90KPCA"><span class="toc-text">核主成分分析KPCA</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E6%80%BB%E7%BB%93"><span class="toc-text">PCA算法总结</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%BB%E8%A6%81%E4%BC%98%E7%82%B9%E6%9C%89%EF%BC%9A"><span class="toc-text">PCA算法的主要优点有：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#PCA%E7%AE%97%E6%B3%95%E7%9A%84%E4%B8%BB%E8%A6%81%E7%BC%BA%E7%82%B9%E6%9C%89%EF%BC%9A"><span class="toc-text">PCA算法的主要缺点有：</span></a></li></ol></li></ol></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yin-xiao-rui-83">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/sdnjyxr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 波利亚老猫 2020
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://sdnjyxr.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/img/favicon.jpg">
+</body>
+
+</html>

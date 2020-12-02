@@ -22,7 +22,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/archives/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/categories/pi/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -151,210 +151,17 @@
 
 <div class="post-preview "
      style="background-image: url('')">
-    <a href="/2020/04/29/svd的应用场景和实现方法/">
+    <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/">
         <h2 class="post-title">
-            SVD的应用场景和实现方法
+            raspberry3b折腾笔记之系统安装
         </h2>
         <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-04-29
+            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-15
         </p>
         
         <div class="post-content-preview">
             <p>
-                
-在Matlab中，我们可以使用 [U,S,V]=svd(A)命令，对矩阵A进行奇异值分解。
-
-什么是SVD？[ USV^{T} = A ]
-其中，U和V是旋转矩阵，S是缩放矩阵，例如：
-
-在2维以上的情况下，如果A是( m \times n )矩阵，则U为 ( m \times m )矩阵，S..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/03/27/距离相关性评价python源码/">
-        <h2 class="post-title">
-            距离相关性评价Python源码
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-27
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                1、欧几里德距离评价对于两点((x_{1},y_{1}),(x_{2},y_{2})),其欧几里德距离表示为
-[ r=\frac{1}{\sqrt{(x_{1}-x_{2})^2+(y_{1}-y_{2})^2}} ]
-python代码如下:
-def sim_distance(prefs,per..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/03/13/基于c的fft数值算法/">
-        <h2 class="post-title">
-            基于C++的FFT数值算法
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-03-13
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-     二十世纪中叶以来，信号处理快速算法研究取得长足进展，其中包括DFT的快速算法，即快速Fourier变换（Fast Fourier Transform， FFT），FFT是各种DFT快速算法的统称。
-
-    N点序列x[k]的DFT与IDFT分别定义为：
-$$X[m] = \sum\..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/01/17/电阻性反馈电路-电压电流转换器（2）/">
-        <h2 class="post-title">
-            电阻性反馈电路---电压电流转换器（2）
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                先介绍一个负阻转换器
-图1 负阻转换器
-根据电路容易得到以下关系：[ i=\frac{v_i-v_o}{R_2} \tag{1} ]
-$$v_o=(1+\frac{R_4}{R_3})v_i \tag{2}$$
-联立求得$$R_i=\frac{v_i}{i}=-\frac{R_2R_3}{R_4..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/01/17/电阻性反馈电路-电压电流转换器（1）/">
-        <h2 class="post-title">
-            电阻性反馈电路---电压电流转换器（1）
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                电压电流转换器（V-I转换器）又称为跨导放大器，它接受某个输入电压$$v_i$$，并产生形如$$i_O=Av_i$$的输出电流，这里A是电路增益或电路灵敏度，以安/伏计。对于实际的转换器，其特性更为真实的取为
-$$i_O=Av_i-\frac{1}{R_o}v_L \tag{1}$$
-式中$$v..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/01/17/电阻性反馈电路-电流电压转换器/">
-        <h2 class="post-title">
-            电阻性反馈电路---电流电压转换器
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                  一个电流电压转化器（I-V转换器）也称为跨阻放大器（transresistance amplifier），它接受一个输入电流$$i_I$$，并产生形为$$v_o = Ai_I$$的输出电压，这里A是电路增益，以伏/安计。如图
-
-图1 基本I-V转换器
-  假设运算放大器是理想的，那么有$$v..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/01/17/花书-实例：主成分分析/">
-        <h2 class="post-title">
-            花书---实例：主成分分析
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                
-主成分分析(principal components analysis, PCA)是一个简单的机器学习算法，可以通过基础的线性代数知识推导。
-
-假设在R^n^空间中有m个点。
-
-编码这些点的一种方式是用低维表示。对于每个点
-
-，会有一个对应的编码向量
-
-。如果l比n小，那么我们便对原来的数据进..
-            </p>
-        </div>
-    </a>
-
-</div>
-
-<hr>
-
-
-
-<div class="post-preview "
-     style="background-image: url('')">
-    <a href="/2020/01/17/计算机视觉-手写体识别，svm分类/">
-        <h2 class="post-title">
-            计算机视觉---手写体识别，SVM分类
-        </h2>
-        <p class="post-meta">
-            <i class="fa fa-calendar" aria-hidden="true"></i> 2020-01-17
-        </p>
-        
-        <div class="post-content-preview">
-            <p>
-                考虑了上次的KNN属于慵懒机器学习算法且准确率还那么低，这次换成SVM试一试。
-我没有选用sk-learn的手写体数据集的原因是他的数据集每张图片是8×8的，而我下载的mnist的digits是一张包含5000张手写体图片的1000×2000的图片，也就是每张手写体图片是20×20的，心想也许这..
+                很少有开头不扯几句直接进入正题的文章了，那么我就说说我为啥买树莓派吧。因为最近的比赛都没有出线，于是想趁这个机会搞搞机器人。之前学过一点opencv，但总感觉不用在成品上没啥意思，所以一狠心，花了246大洋买了这个raspberry3b。因为本人确实没有钱，选用了最经济的购买方案：pi、原配保护..
             </p>
         </div>
     </a>
@@ -370,10 +177,6 @@ $$i_O=Av_i-\frac{1}{R_o}v_L \tag{1}$$
 
 <ul class="pager">
     
-    
-    <li class="next">
-        <a href="/archives/page/2/">Older Posts &rarr;</a>
-    </li>
     
 </ul>
 

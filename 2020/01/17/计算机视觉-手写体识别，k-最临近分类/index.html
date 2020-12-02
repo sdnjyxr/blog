@@ -18,11 +18,11 @@
     <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
     <title>
         
-        Hello World｜波利亚猫舍
+        计算机视觉---手写体识别，K-最临近分类｜波利亚猫舍
         
     </title>
 
-    <link rel="canonical" href="http://sdnjyxr.github.io/2016/05/26/hello-world/">
+    <link rel="canonical" href="http://sdnjyxr.github.io/2020/01/17/计算机视觉-手写体识别，k-最临近分类/">
 
     <!-- Bootstrap Core CSS -->
     
@@ -126,13 +126,13 @@
 
 
 <img class="wechat-title-img"
-     src="https://cdn.yinxiaorui.top/background.jpg">
+     src="">
 
 
 <style>
     
     header.intro-header {
-        background-image: url('https://cdn.yinxiaorui.top/background.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+        background-image: url('')
     }
 
     
@@ -143,14 +143,12 @@
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
                 <div class="post-heading">
-                    <h1>Hello World</h1>
-                    
-                    <h2 class="subheading">hi, I&#39;m haojen ma</h2>
+                    <h1>计算机视觉---手写体识别，K-最临近分类</h1>
                     
                     <span class="meta">
                          作者 Yin Xiaorui
                         <span>
-                          日期 2016-05-26
+                          日期 2020-01-17
                          </span>
                     </span>
                     <div class="tags text-center">
@@ -162,7 +160,7 @@
     </div>
     <div class="post-title-haojen">
         <span>
-            Hello World
+            计算机视觉---手写体识别，K-最临近分类
         </span>
     </div>
 </header>
@@ -173,19 +171,22 @@
         <div class="row">
             <!-- Post Container -->
             <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
-                <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
+                <p>参考了前辈的文章，对MNIST库的手写体进行训练，可能是中外手写习惯的不同，准确率不是很高，建议自己搜集数据库，可以在周围同学处搜集素材，本文对MNIST中的digits.png划分为5000个样本进行训练。</p>
+<p><img src="http://blog.yinxiaorui.top/wp-content/uploads/2020/01/%E6%95%88%E6%9E%9C%E5%9B%BE1.png"></p>
+<p>图1 效果图</p>
+<p><strong><em>S.1 对digits.png进行划分，得到训练的数据集</em></strong></p>
+<p>def initKnn():<br>    knn = cv2.ml.KNearest_create()    #建立knn模型<br>    img = cv2.imread(‘digits.png’)    #获取数据集<br>    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)    #转灰度图<br>    cells = [np.hsplit(row,100) for row in np.vsplit(gray,50)]    #划分图片<br>    train = np.array(cells).reshape(-1,400).astype(np.float32)    #将图片转为行向量<br>    trainLabel = np.repeat(np.arange(10),500)    #创建索引<br>    return knn, train, trainLabel</p>
+<p><strong><em>S.2 对图片进行形态学处理，并边缘检测，框选数字所在区域，并显示响应预测数值</em></strong></p>
+<p>def findRoi(frame, thresValue):<br>    rois = []<br>    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)<br>    gray2 = cv2.dilate(gray,None,iterations=2)    #膨胀两次<br>    gray2 = cv2.erode(gray2,None,iterations=2)    #腐蚀两次<br>    edges = cv2.absdiff(gray,gray2)    #做差，创建sobel算子边缘检测<br>    x = cv2.Sobel(edges,cv2.CV_16S,1,0)<br>    y = cv2.Sobel(edges,cv2.CV_16S,0,1)<br>    absX = cv2.convertScaleAbs(x)<br>    absY = cv2.convertScaleAbs(y)<br>    dst = cv2.addWeighted(absX,0.5,absY,0.5,0)<br>    ret, ddst = cv2.threshold(dst,thresValue,255,cv2.THRESH_BINARY)    #二值化<br>    im, contours, hierarchy = cv2.findContours(ddst,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)    #寻找边界<br>    for c in contours:<br>        x, y, w, h = cv2.boundingRect(c)<br>        if w &gt; 10 and h &gt; 20:<br>            rois.append((x,y,w,h))<br>    digits = []<br>    for r in rois:<br>        x, y, w, h = r<br>        digit, th = findDigit(knn, edges[y:y+h,x:x+w], 50)<br>        digits.append(cv2.resize(th,(20,20)))<br>        cv2.rectangle(frame, (x,y), (x+w,y+h), (153,153,0), 2)    #绘制矩形框<br>        cv2.putText(frame, str(digit), (x,y), cv2.FONT_HERSHEY_SIMPLEX, 1, (127,0,255), 2)<br>    return edges</p>
+<p><strong><em>S.3 对检测到的ROI区域进行预测，输出预测值</em></strong></p>
+<p>def findDigit(knn, roi, thresValue):<br>    ret, th = cv2.threshold(roi, thresValue, 255, cv2.THRESH_BINARY)<br>    th = cv2.resize(th,(20,20))<br>    out = th.reshape(-1,400).astype(np.float32)<br>    ret, result, neighbours, dist = knn.findNearest(out, k=5)<br>    return int(result[0][0]), th</p>
+<p><strong><em>完整代码如下</em></strong></p>
+<p>#!/usr/bin/python3</p>
+<h1 id="coding-UTF-8"><a href="#coding-UTF-8" class="headerlink" title="-- coding: UTF-8 --"></a>-<em>- coding: UTF-8 -</em>-</h1><p>import cv2<br>import numpy as np</p>
+<p>def initKnn():<br>    knn = cv2.ml.KNearest_create()<br>    img = cv2.imread(‘digits.png’)<br>    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)<br>    cells = [np.hsplit(row,100) for row in np.vsplit(gray,50)]<br>    train = np.array(cells).reshape(-1,400).astype(np.float32)<br>    trainLabel = np.repeat(np.arange(10),500)<br>    return knn, train, trainLabel</p>
+<p>def findRoi(frame, thresValue):<br>    rois = []<br>    gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)<br>    gray2 = cv2.dilate(gray,None,iterations=2)<br>    gray2 = cv2.erode(gray2,None,iterations=2)<br>    edges = cv2.absdiff(gray,gray2)<br>    x = cv2.Sobel(edges,cv2.CV_16S,1,0)<br>    y = cv2.Sobel(edges,cv2.CV_16S,0,1)<br>    absX = cv2.convertScaleAbs(x)<br>    absY = cv2.convertScaleAbs(y)<br>    dst = cv2.addWeighted(absX,0.5,absY,0.5,0)<br>    ret, ddst = cv2.threshold(dst,thresValue,255,cv2.THRESH_BINARY)<br>    im, contours, hierarchy = cv2.findContours(ddst,cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)<br>    for c in contours:<br>        x, y, w, h = cv2.boundingRect(c)<br>        if w &gt; 10 and h &gt; 20:<br>            rois.append((x,y,w,h))<br>    digits = []<br>    for r in rois:<br>        x, y, w, h = r<br>        digit, th = findDigit(knn, edges[y:y+h,x:x+w], 50)<br>        digits.append(cv2.resize(th,(20,20)))<br>        cv2.rectangle(frame, (x,y), (x+w,y+h), (153,153,0), 2)<br>        cv2.putText(frame, str(digit), (x,y), cv2.FONT_HERSHEY_SIMPLEX, 1, (127,0,255), 2)<br>    return edges</p>
+<p>def findDigit(knn, roi, thresValue):<br>    ret, th = cv2.threshold(roi, thresValue, 255, cv2.THRESH_BINARY)<br>    th = cv2.resize(th,(20,20))<br>    out = th.reshape(-1,400).astype(np.float32)<br>    ret, result, neighbours, dist = knn.findNearest(out, k=5)<br>    return int(result[0][0]), th</p>
+<p>knn, train, trainLabel = initKnn()<br>knn.train(train,cv2.ml.ROW_SAMPLE,trainLabel)<br>cap = cv2.VideoCapture(0)<br>width = 426*2<br>height = 480<br>videoFrame = cv2.VideoWriter(‘frame.avi’,cv2.VideoWriter_fourcc(‘M’,’J’,’P’,’G’),25,(int(width),int(height)),True)<br>while True:<br>    ret, frame = cap.read()<br>    frame = frame[:,:426]<br>    edges = findRoi(frame, 50)<br>    newEdges = cv2.cvtColor(edges, cv2.COLOR_GRAY2BGR)<br>    newFrame = np.hstack((frame,newEdges))<br>    cv2.imshow(‘frame’, newFrame)<br>    videoFrame.write(newFrame)<br>    key = cv2.waitKey(1) &amp; 0xff<br>    if key == ord(‘ ‘):<br>        break</p>
 
                 <hr>
                 
@@ -193,10 +194,15 @@
                 <ul class="pager">
                     
                     <li class="previous">
-                        <a href="/2020/01/15/raspberry3b折腾笔记之系统安装/" data-toggle="tooltip" data-placement="top"
-                           title="raspberry3b折腾笔记之系统安装">&larr; Previous Post</a>
+                        <a href="/2020/01/17/计算机视觉-手写体识别，svm分类/" data-toggle="tooltip" data-placement="top"
+                           title="计算机视觉---手写体识别，SVM分类">&larr; Previous Post</a>
                     </li>
                     
+                    
+                    <li class="next">
+                        <a href="/2020/01/17/计算机视觉-条形码-二维码识别/" data-toggle="tooltip" data-placement="top"
+                           title="计算机视觉---条形码/二维码识别">Next Post &rarr;</a>
+                    </li>
                     
                 </ul>
 
@@ -233,7 +239,7 @@
 
             <div class="hidden-xs col-sm-3 toc-col">
                 <div class="toc-wrap">
-                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick-Start"><span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create-a-new-post"><span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run-server"><span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate-static-files"><span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy-to-remote-sites"><span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+                    <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#coding-UTF-8"><span class="toc-text">-- coding: UTF-8 --</span></a></li></ol>
                 </div>
             </div>
         </div>
@@ -374,6 +380,35 @@
     })
 </script>
 
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
 
 
 <!-- Google Analytics -->
