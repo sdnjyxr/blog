@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="尹晓瑞在 Github 上的个人博客">
+    <meta name="keyword" content="">
+    <meta name="theme-color" content="#600090">
+    <meta name="msapplication-navbutton-color" content="#600090">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="#600090">
+    <link rel="shortcut icon" href="https://cdn4.iconfinder.com/data/icons/ionicons/512/icon-person-128.png">
+    <link rel="alternate" type="application/atom+xml" title="波利亚老猫" href="/atom.xml">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+    <link rel="stylesheet" href="//cdn.bootcss.com/font-awesome/4.6.3/css/font-awesome.css">
+    <title>
+        
+        光学系统的像质评价｜波利亚猫舍
+        
+    </title>
+
+    <link rel="canonical" href="http://sdnjyxr.github.io/2021/05/26/光学系统的像质评价/">
+
+    <!-- Bootstrap Core CSS -->
+    
+<link rel="stylesheet" href="/css/bootstrap.min.css">
+
+
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/blog-style.css">
+
+
+    <!-- Pygments Github CSS -->
+    
+<link rel="stylesheet" href="/css/syntax.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<style>
+
+    header.intro-header {
+        background-image: url('background.jpg')
+    }
+</style>
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="" class="animated fadeIn">
+<!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top " id="nav-top" data-ispost = "true" data-istags="false
+" data-ishome = "false" >
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand animated pulse" href="/">
+                <span class="brand-logo">
+                    波利亚老猫
+                </span>
+                's Blog
+            </a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <!-- /.navbar-collapse -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">Home</a>
+                    </li>
+					
+                    
+                        
+							
+                        <li>
+                            <a href="/Tags/">Tags</a>
+                        </li>
+							
+						
+                    
+					
+					
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+//    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+<!-- Main Content -->
+
+<!--only post-->
+
+
+<img class="wechat-title-img"
+     src="https://cdn.yinxiaorui.top/4.jpg">
+
+
+<style>
+    
+    header.intro-header {
+        background-image: url('https://cdn.yinxiaorui.top/4.jpg?imageView2/1/w/1400/h/400/interlace/1/q/90')
+    }
+
+    
+</style>
+
+<header class="intro-header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <div class="post-heading">
+                    <h1>光学系统的像质评价</h1>
+                    
+                    <span class="meta">
+                         作者 Yin Xiaorui
+                        <span>
+                          日期 2021-05-26
+                         </span>
+                    </span>
+                    <div class="tags text-center">
+                        
+                        <a class="tag" href="/tags/#红外光电探测原理"
+                           title="红外光电探测原理">红外光电探测原理</a>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="post-title-haojen">
+        <span>
+            光学系统的像质评价
+        </span>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+            <!-- Post Container -->
+            <div class="col-lg-8 col-lg-offset-1 col-sm-9 post-container">
+                <blockquote>
+<p>在理想光学系统中，从物点发出的所有光线经过光学系统都会聚在像点上。而实际的光学系统则不然，物空间一个物点发出的光线经实际光学系统后，不再会聚于像空间的一点，而是形成一个弥散斑。导致实际光学系统中像点弥散成一个斑的原因主要有两个：其一是由于光的波动本性而产生的衍射作用导致光路偏离简单的几何光学（光的直线传播定律）而带来的误差；另一个是由于光学表面几何形状和光学材料色散等产生的各种像差。</p>
+</blockquote>
+<h2 id="像差"><a href="#像差" class="headerlink" title="像差"></a>像差</h2><p>单色光成像时会产生性质不同的五种像差，包括<strong>球差、彗差、像散、场曲和畸变</strong>，这五种像差通常也被统称为单色像差。其中球差是由于球面不能完善成像而产生的，轴上光束成像只有球差。彗差、像散、场曲、畸变这四种像差通常称为轴外像差，产生的原因是折射球面对主光线的非对称性。</p>
+<p>由于同一种光学介质对不同频率的光的折射率不同，因此不同频率的光通过光学系统时，因折射率不同而有不同的光程，导致成像位置和大小的不同，这种不同频率光的成像差异称为<strong>色差</strong>。根据色差导致的成像在位置和大小上的不同，将色差分为位置色差和倍率色差两种。</p>
+<p>以上七种像差都是在几何光学的基础上定义的，所以也通称为几何像差。进行光学系统设计时也必须对各种几何像差进行校正和平衡。但是任何光学系统都不可能也没必要把所有像差校正为零，必然还有残余像差，像差大小直接关系到成像质量。为此，人们提出多种光学系统成像质量的评价方法，红外光学系统中常用的像质评价方法有分辨率、点列图和光学传递函数等方法。</p>
+<h2 id="分辨率法"><a href="#分辨率法" class="headerlink" title="分辨率法"></a>分辨率法</h2><blockquote>
+<p>分辨率是反映光学系统能分辨物体细节的能力，它是光学系统中的一个重要性能指标。</p>
+</blockquote>
+<p>分辨率定义为光学系统分辨物体细节的能力，瑞利指出：<strong>两个相邻的物点经光学系统成像后的两个大小相等的像斑能够被该光学系统分辨的条件为，在光学系统的像面上这两个像斑的中心间距不小于像斑的半径（指像斑的第一暗环的半径）。</strong></p>
+<p>在不考虑几何像差时，物点经光学系统后所成的像斑大小完全由衍射理论决定。对于理想光学系统，物点所成像斑实际上是圆孔衍射图样，由一个明亮的中心圆斑和环绕其外的若干个明暗相间的环组成。这个中心圆斑称为艾利圆或艾利斑，它包含了整个衍射像辐射能量的**84%**。</p>
+<p>光学系统实际分辨率通常采用如图所示的鉴别率板来测量。鉴别率板上沿不同的方向分布着各种不同分辨率的明暗条纹，将其置于光学系统的物面上，然后从像面上找出系统能够清晰分辨的分辨率最高（间距最小的明暗条纹），则该条纹对应的分辨率就是光学系统是实际分辨率。</p>
+<p><img src="/2021/05/26/%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%83%8F%E8%B4%A8%E8%AF%84%E4%BB%B7/%E6%B5%8B%E9%87%8F%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F%E5%AE%9E%E9%99%85%E5%88%86%E8%BE%A8%E7%8E%87%E7%9A%84%E9%89%B4%E5%88%AB%E7%8E%87%E6%9D%BF.jpg" alt="测量光学系统实际分辨率的鉴别率板"></p>
+<p>采用分辨率评价光学系统的成像质量，具有指标单一、便于测量的优点。但是分辨率只能表达细节能不能分辨的极限，对于较粗线条的成像质量，不做出定量评价，因此用分辨率作为光学系统成像质量的评价方法并不是很完善。主要原因包括：</p>
+<ol>
+<li>光学系统的实际分辨率不仅与其几何像差有关，还很大程度上取决于光学系统的相对孔径（即衍射现象），只有在几何像差较大的光学系统中，分辨率才能直接反应系统的几何像差大小，因此分辨率也常作为大像差光学系统的成像质量评价指标；</li>
+<li>用于光学系统分辨率测量的鉴别率板为黑白相间的条纹，这与实际物体的亮度背景有很大的差别，而且由于照明条件和探测器的不同，对同一个光学系统的分辨率测量结果也会有差别；</li>
+<li>由于对比度反转可能造成分辨率测量中的“伪分辨率现象”，即光学系统对鉴别率板上的某一组条纹不能分辨，但对于更密（分辨率更高）的一组条纹反而可以分辨。</li>
+</ol>
+<p>基于以上原因，用分辨率来评价光学系统的成像质量并不是一种严格和可靠的成像质量评价方法。尤其当光学系统的像质要求较高时，分辨率法不能满足检测需求。</p>
+<h2 id="点列图"><a href="#点列图" class="headerlink" title="点列图"></a>点列图</h2><blockquote>
+<p>利用光学系统在给定方向上的点列图中点集的密集程度来衡量光学系统的成像质量的方法就被称为点列图法。</p>
+</blockquote>
+<p>在几何光学的成像过程中，假设从物点发出多条光线，由于光学系统像差存在，这些光线在像面上不会集中于一点，而是形成一个分布在一定范围内的弥散图形，这一弥散图形就称为光学系统在该视场方向上的点列图。</p>
+<p>点列图法实际上是采用大量光线追迹的方法获取从物点发出的不同指向（对应入瞳平面上的不同位置）不同波长的光线在像面上的分布情况。在大量光线追迹的前提下，像面上光线点迹分布密度就代表了像点的光强分布情况。</p>
+<p>使用点列图时，通常用一定能量集中度的弥散斑直径来评价像质。例如：能量集中度为90%的弥散斑直径为30μm，是指所有的追迹光线中有90%的点落在以弥散斑质心为中心的直径为30μm的圆内。而弥散斑直径的倒数即为光学系统的分辨率。</p>
+<p>利用点列图来评价光学系统的成像质量时，要进行大量光线的光路追迹运算，通常要计算数百条甚至数万条光线，计算量非常大，只有在利用计算机进行辅助计算的情况下才能实现。然而这种方法又是一种简便易行而且直观的光学系统成像质量评价方法，常在像差较大的照相物镜等光学系统的设计中得到应用。</p>
+<h2 id="光学传递函数"><a href="#光学传递函数" class="headerlink" title="光学传递函数"></a>光学传递函数</h2><blockquote>
+<p>若把光学系统看作是线性不变系统，那么物体经光学系统成像，可视为物体经光学系统传递后，传递效果是频率不变，但其对比度下降，相位也会发生推移，并在某一频率处截止，即对比度为零。这种对比度的下降和相位推移是随频率不同而不同的，其函数关系我们就称之为<strong>光学传递函数(OTF)**。<br>相应的光学传递函数(OTF)也分为描述对比度随频率变化的调制传递函数(**MTF</strong>,也被称作<strong>振幅传递函数</strong>)和描述相位推移随频率变化的**相位传递函数(PTF)**。</p>
+</blockquote>
+<p>光学传递函数的使用条件：由近代物理光学知道，使用光学传递函数要求成像系统满足线性和空间不变性条件。</p>
+<ol>
+<li>线性不变性，是指对系统物方图样之间辐射强度分布满足线性叠加，也就是说要求参与成像的光束是非相干光束，这样的光学系统被称为非相干光学系统。</li>
+<li>空间不变性，是指当一个物点在物面上移动时，它的像点相应在像面上移动，但不改变其分布形状。</li>
+</ol>
+<p>光学传递函数描述的是光学系统的传递能力随空间频率的变化情况，下面首先给出空间频率的定义：在单位长度（每毫米）上亮度按照正弦变化的图形的周期数，单位是线对数/毫米(lp/mm,linepairs/mm)。如图为典型的正弦光栅的图样，图中相邻的两个最大值的距离是正弦光栅的空间周期，单位是毫米；而空间周期的倒数就是空间频率(Spatial Frequency)。</p>
+<p><img src="/2021/05/26/%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%83%8F%E8%B4%A8%E8%AF%84%E4%BB%B7/%E7%A9%BA%E9%97%B4%E9%A2%91%E7%8E%87.jpg" alt="空间频率"></p>
+<p>MTF描述的是物像对比度（也称调制度）的传递情况随空间频率的变化。调制度（对比度）表示了图样中最亮处与最暗处的差别，对上图的正弦光栅，设其最大亮度为$I_{max}$，最小亮度为$I_{min}$，我们用调制度(Modulation)表示反差的大小。调制度M定义如下：</p>
+<p>$$<br>M=\frac{I_{\max }-I_{\min }}{I_{\max }+I_{\min }}<br>$$</p>
+<p>很明显，调制度介于0和1之间。调制度越大，意味着反差越大。当最大亮度与最小亮度完全相等时，反差完全消失，这时的调制度等于0。</p>
+<p>这里要研究的调制传递函数就是像的调制度$M’$与物的调制度$M$之比，即</p>
+<p>$$<br>\mathrm{MTF}=\frac{M^{\prime}}{M}<br>$$</p>
+<p>由于对一个理想的光学系统，像的调制度会完全等于物的调制度，即调制传递函数等于1。所以，调制传递函数可以理解为实际像的调制度与理想像的调制度之比。由于光学系统像差的存在，实际在经过光学系统传递后，像的调制度都会下降。因此，光学系统的调制传递函数MTF值必定介于0~1之间，并且越接近1则光学系统的成像质量越好。</p>
+<p>MTF可以综合反映光学系统的对比度传递情况和空间分辨率，要评价一个光学系统成像质量优劣，也需要从这两个方面综合考虑。如图所示，有两个光学系统(I,II)其MTF曲线分别对应图中的曲线1和曲线2。对于目视光学系统或光刻系统等，往往要求系统在高空间频率下具有分辨物体细节的能力，同时这些应用场合物的对比度往往可以较高，系统对MTF的阈值要求较低，通常要达到0.03，此时光学系统II更加适合。而对于摄影系统，对高空间频率下的细节分辨能力要求并不高，但要求在叫低对比度下获得层次尽可能丰富的像，系统对MTF的阈值要求较高，通常在0.1以上，光学系统I不仅分辨率高于光学系统II，且在中低频部分有较高的对比度，能拍摄出清晰而层次丰富的、真实感强的照片，因此光学系统I更加适合。所以，在评价光学系统的成像质量时，不能单纯地从其MTF曲线来说哪个更好，而是要结合系统的使用目的来分析其MTF曲线，通常不同的使用要求对MTF的要求也是不一样的。</p>
+<p><img src="/2021/05/26/%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F%E7%9A%84%E5%83%8F%E8%B4%A8%E8%AF%84%E4%BB%B7/%E6%A0%B9%E6%8D%AEMTF%E8%AF%84%E4%BB%B7%E5%85%89%E5%AD%A6%E7%B3%BB%E7%BB%9F%E6%88%90%E5%83%8F%E8%B4%A8%E9%87%8F.jpg" alt="根据MTF评价光学系统成像质量"></p>
+
+                <hr>
+                
+
+                <ul class="pager">
+                    
+                    
+                    <li class="next">
+                        <a href="/2021/03/17/散射/" data-toggle="tooltip" data-placement="top"
+                           title="散射">Next Post &rarr;</a>
+                    </li>
+                    
+                </ul>
+
+                
+
+                
+
+
+                <!--加入新的评论系统-->
+                
+                <!-- 来必力City版安装代码 -->
+                <div id="lv-container" data-id="city" data-uid="MTAyMC81MjEwNC8yODU4NQ">
+                    <script type="text/javascript">
+                        (function(d, s) {
+                            var j, e = d.getElementsByTagName(s)[0];
+
+                            if (typeof LivereTower === 'function') { return; }
+
+                            j = d.createElement(s);
+                            j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+                            j.async = true;
+
+                            e.parentNode.insertBefore(j, e);
+                        })(document, 'script');
+                    </script>
+                    <noscript> 为正常使用来必力评论功能请激活JavaScript</noscript>
+                </div>
+                <!-- City版安装代码已完成 -->
+                
+
+                
+
+            </div>
+
+            <div class="hidden-xs col-sm-3 toc-col">
+                <div class="toc-wrap">
+                    <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%83%8F%E5%B7%AE"><span class="toc-text">像差</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%88%86%E8%BE%A8%E7%8E%87%E6%B3%95"><span class="toc-text">分辨率法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%82%B9%E5%88%97%E5%9B%BE"><span class="toc-text">点列图</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%89%E5%AD%A6%E4%BC%A0%E9%80%92%E5%87%BD%E6%95%B0"><span class="toc-text">光学传递函数</span></a></li></ol>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5 class="text-center">
+                        <a href="/tags/">FEATURED TAGS</a>
+                    </h5>
+                    <div class="tags">
+                        
+                        <a class="tag" href="/tags/#红外光电探测原理"
+                           title="红外光电探测原理">红外光电探测原理</a>
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Friends Blog -->
+                
+            </div>
+        </div>
+
+    </div>
+</article>
+
+
+
+
+
+
+
+<!-- Footer -->
+<!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 text-center">
+                <br>
+                <ul class="list-inline text-center">
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yin-xiao-rui-83">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/sdnjyxr">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; 波利亚老猫 2021
+                    <br>
+                    <span id="busuanzi_container_site_pv" style="font-size: 12px;">PV: <span id="busuanzi_value_site_pv"></span> Times</span>
+                    <br>
+                    Theme by <a target="_blank" rel="noopener" href="https://haojen.github.io/">Haojen Ma</a>
+                </p>
+
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+
+<script src="/js/jquery.min.js"></script>
+
+
+<!-- Bootstrap Core JavaScript -->
+
+<script src="/js/bootstrap.min.js"></script>
+
+
+<!-- Custom Theme JavaScript -->
+
+<script src="/js/blog.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://sdnjyxr.github.io/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("//cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- mathjax -->
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+        processEscapes: true
+    },
+    TeX: {
+        equationNumbers: { autoNumber: "AMS" },
+        noUndefined: { attributes: { mathcolor: "red", mathbackground: "#FFEEEE", mathsize: "90%" } },
+        Macros: { href: "{}" }
+    }});
+</script>
+
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for(i=0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+</script>
+
+<script type="text/javascript" async
+  src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js?config=TeX-MML-AM_CHTML">
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- swiftype -->
+<script type="text/javascript">
+  (function(w,d,t,u,n,s,e){w['SwiftypeObject']=n;w[n]=w[n]||function(){
+  (w[n].q=w[n].q||[]).push(arguments);};s=d.createElement(t);
+  e=d.getElementsByTagName(t)[0];s.async=1;s.src=u;e.parentNode.insertBefore(s,e);
+  })(window,document,'script','//s.swiftypecdn.com/install/v2/st.js','_st');
+
+  _st('install','','2.0.0');
+</script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<!--wechat title img-->
+<img class="wechat-title-img" src="/img/favicon.jpg">
+</body>
+
+</html>
